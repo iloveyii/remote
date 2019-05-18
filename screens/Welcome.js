@@ -3,7 +3,7 @@ import {Badge, Block, Card, Text} from '../components';
 import {Dimensions, Image, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {mocks, theme} from '../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import Player from './Player';
 
 const {width} = Dimensions.get('window');
 
@@ -35,6 +35,9 @@ class Welcome extends React.Component {
 
     handleTab(tab) {
         const {channels} = this.props;
+        if(tab==='TV') {
+
+        }
         const filtered = channels.filter(
             channel => channel.tags.includes(tab.toLowerCase())
         );
@@ -49,24 +52,41 @@ class Welcome extends React.Component {
     handleChannel(cmdString) {
         console.log(cmdString);
 
-        fetch('http://luma.softhem.se:8030?cmdadd=' + cmdString)
+        fetch('http://luma.softhem.se:8030/server/index.php?cmdadd=' + cmdString)
             .then(response => console.log(response))
             .catch(err => console.log(err));
     }
 
+    showVideo() {
+        if(this.state.active == 'TV') {
+            return(
+                <Block>
+
+                    <Block>
+                        <Player />
+                    </Block>
+
+                </Block>
+            )
+        }
+    }
+
     render() {
         const {channels} = this.state;
-        const tabs = ['Remote', 'Channels', 'Favourite'];
+        const tabs = ['Remote', 'Channels', 'Favourite', 'TV'];
 
         return (
             <Block>
                 <Block flex={false} row center space="between" style={styles.header}>
-                    <Text h1 bold>Welcome</Text>
+                    <Text h1 bold>Live TV</Text>
                 </Block>
 
                 <Block flex={false} row style={styles.tabs}>
                     {tabs.map(tab => this.renderTab(tab))}
                 </Block>
+                {
+                   this.showVideo()
+                }
 
                 <ScrollView
                     showsVerticalScrollIndicator={false}
@@ -144,5 +164,9 @@ const styles = StyleSheet.create({
     channelImg: {
         height: theme.sizes.base * 3.2,
         width: theme.sizes.base * 3.2,
+    },
+    webView: {
+        height: theme.sizes.base * 13.2,
+        width: '100%',
     }
 });

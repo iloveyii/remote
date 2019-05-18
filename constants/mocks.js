@@ -49,7 +49,7 @@ const channels = [
         id: 'volm',
         name: 'Vol -',
         icon: 'ios-volume-low',
-        tags: ['remote', 'favourite'],
+        tags: ['remote'],
         count: 133,
         image: require('../assets/icons/fertilizers.png'),
         cmd : 'VOL -1'
@@ -82,13 +82,23 @@ const channels = [
         cmd : 'PLAY http://expressdigital.flashmediacast.com:1935/expressdigital/livestream/playlist.m3u8 https://pakistani.pk/uploads/reviews/photos/original/45/9d/16/LIVE-EXPRESS-NEWS-30-1457464500.jpg'
     },
     {
-        id: 'ch1',
+        id: 'ch4',
         name: 'PTV News',
         icon: 'ios-volume-low',
         tags: ['channels'],
         count: 133,
         image: require('../assets/icons/ptv-news.jpg'),
         cmd : 'PLAY http://67.231.248.131:1935/live/PTVnews/chunklist_w1281891626.m3u8 http://www.gharana.pk/wp-content/uploads/2017/10/PTV-News-Live-HD-Streaming-24x7-LIVE-HD-GharanaPK.jpg'
+    },
+
+    {
+        id: 'ch5',
+        name: 'ARY News',
+        icon: 'ios-volume-low',
+        tags: ['channels'],
+        count: 133,
+        image: require('../assets/icons/ary-news.png'),
+        cmd : 'PLAY http://158.69.228.195:1935/newsmobile/myStream/playlist.m3u8 http://live.arynews.tv/pk/LIVE.jpg'
     },
 
 ];
