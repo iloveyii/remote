@@ -14,7 +14,7 @@ class Welcome extends React.Component {
         this.state = {
             active: 'Remote',
             channels: [],
-            currentChannels : [],
+            currentChannels: [],
             currentUrl: ''
         };
 
@@ -34,18 +34,18 @@ class Welcome extends React.Component {
             navigation.navigate('Tv');
         }
 
-        if(tab === 'Remote') {
+        if (tab === 'Remote') {
             this.setState({currentChannels: controls, active: tab});
         }
 
-        if(tab === 'Channels') {
+        if (tab === 'Channels') {
             const filtered = channels.filter(
                 channel => channel.tags.includes(tab.toLowerCase())
             );
             this.setState({currentChannels: filtered, active: tab});
         }
 
-        if(tab === 'Favourite') {
+        if (tab === 'Favourite') {
             const filtered = channels.filter(
                 channel => channel.tags.includes(tab.toLowerCase())
             );

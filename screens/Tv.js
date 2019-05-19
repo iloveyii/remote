@@ -4,6 +4,7 @@ import {Animated, Dimensions, FlatList, Image, StyleSheet, TouchableOpacity} fro
 import {mocks, theme} from '../constants';
 import Player from '../components/Player';
 import Icon from "./Welcome";
+import {MaterialIcons} from '@expo/vector-icons'
 
 const {width, height} = Dimensions.get('window');
 
@@ -14,54 +15,23 @@ class Tv extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            active: 'Remote',
             channels: [],
-            currentChannels: [],
-            currentUrl: ''
+            currentUrl: 'http://67.231.248.131:1935/live/PTVnews/chunklist_w1281891626.m3u8',
+            channelName: 'PTV News'
         };
 
-        this.setActive = this.setActive.bind(this);
         this.renderIllustrations = this.renderIllustrations.bind(this);
         this.setUrl = this.setUrl.bind(this);
     }
 
-    setActive(tab) {
-        this.handleTab(tab);
+    setUrl(channel) {
+        const cmdString = channel.cmd;
+        const cmdArray = cmdString.split(' ');
+        const currentUrl = cmdArray[1];
+        console.log('Setting url', currentUrl);
+        this.setState({currentUrl, channelName: channel.name});
     }
 
-    setUrl(cmd) {
-
-    }
-
-    handleTab(tab) {
-        const {channels, controls} = this.props;
-
-        if (tab === 'TV') {
-
-        }
-
-        if (tab === 'Remote') {
-            this.setState({currentChannels: controls, active: tab});
-        }
-
-        if (tab === 'Channels') {
-            const filtered = channels.filter(
-                channel => channel.tags.includes(tab.toLowerCase())
-            );
-            this.setState({currentChannels: filtered, active: tab});
-        }
-
-        if (tab === 'Favourite') {
-            const filtered = channels.filter(
-                channel => channel.tags.includes(tab.toLowerCase())
-            );
-            this.setState({currentChannels: filtered, active: tab});
-        }
-    }
-
-    componentDidMount() {
-        this.setActive('TV');
-    }
 
     renderIllustrations() {
         const {channels} = this.props;
@@ -79,7 +49,7 @@ class Tv extends React.Component {
                 renderItem={({item}) => (
                     <TouchableOpacity
                         key={item.name}
-                        onPress={() => this.setUrl(item.cmd)}
+                        onPress={() => this.setUrl(item)}
                     >
                         <Card center middle shadow style={styles.channel}>
                             <Badge margin={[0, 0, 15]} size={50} color="rgba(41,216,143,0.20)">
@@ -105,16 +75,20 @@ class Tv extends React.Component {
     }
 
     render() {
-        const currentUrl = 'http://67.231.248.131:1935/live/PTVnews/chunklist_w1281891626.m3u8';
-        const {channels} = this.props;
-        console.log(channels.length);
+        const {currentUrl} = this.state;
 
         return (
             <Block>
                 <Block flex={false} row center space="around" style={styles.header}>
                     <Text h1 center bold>
-                        Live.
-                        <Text h1 primary> TV.</Text>
+                        <Text h1 primary> {this.state.channelName}. </Text>
+                        <Text h2 accent> Live.
+                            <MaterialIcons
+                                name="wifi"
+                                size={20}
+                                color= {theme.colors.accent}
+                            />
+                        </Text>
                     </Text>
                 </Block>
 
