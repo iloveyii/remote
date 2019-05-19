@@ -1,6 +1,6 @@
 import React from 'react';
 import {Badge, Block, Card, Text} from '../components';
-import {Animated, Dimensions, StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
+import {Animated, Dimensions, FlatList, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {mocks, theme} from '../constants';
 import Player from '../components/Player';
 import Icon from "./Welcome";
@@ -10,9 +10,6 @@ const {width, height} = Dimensions.get('window');
 class Tv extends React.Component {
 
     scrollX = new Animated.Value(0);
-    static navigationOptions = {
-        header: null
-    };
 
     constructor(props) {
         super(props);
@@ -67,7 +64,7 @@ class Tv extends React.Component {
     }
 
     renderIllustrations() {
-        const { channels } = this.props;
+        const {channels} = this.props;
         return (
             <FlatList
                 horizontal
@@ -78,12 +75,11 @@ class Tv extends React.Component {
                 snapToAlignment="center"
                 data={channels}
                 extraDate={this.state}
-                keyExtractor={(item)=>`${item.id}`}
-                renderItem={({item})=>(
+                keyExtractor={(item) => `${item.id}`}
+                renderItem={({item}) => (
                     <TouchableOpacity
                         key={item.name}
                         onPress={() => this.setUrl(item.cmd)}
-                        style={styles.flatItem}
                     >
                         <Card center middle shadow style={styles.channel}>
                             <Badge margin={[0, 0, 15]} size={50} color="rgba(41,216,143,0.20)">
@@ -95,13 +91,12 @@ class Tv extends React.Component {
 
                             </Badge>
                             <Text medium height={20}>{item.name}</Text>
-                            <Text gray caption>{item.count} products</Text>
                         </Card>
                     </TouchableOpacity>
                 )}
                 onScroll={
                     Animated.event([{
-                        nativeEvent: { contentOffset: { x: this.scrollX } }
+                        nativeEvent: {contentOffset: {x: this.scrollX}}
                     }])
                 }
             >
@@ -116,20 +111,22 @@ class Tv extends React.Component {
 
         return (
             <Block>
-                <Block flex={false} row center space="between" style={styles.header}>
-                    <Text h1 bold>Live TV</Text>
+                <Block flex={false} row center space="around" style={styles.header}>
+                    <Text h1 center bold>
+                        Live.
+                        <Text h1 primary> TV.</Text>
+                    </Text>
                 </Block>
 
-                <Block>
+                <Block center middle flex={true}>
                     <Player url={currentUrl}/>
                 </Block>
 
-                <Block center middle>
+                <Block center middle flex={0.4}>
                     {this.renderIllustrations()}
                 </Block>
 
             </Block>
-
         )
     }
 }
@@ -139,17 +136,21 @@ Tv.defaultProps = {
     controls: mocks.controls,
     tabs: mocks.tabs,
     illustrations: [
-        { id: 1, source: require('../assets/images/illustration_1.png') },
-        { id: 2, source: require('../assets/images/illustration_2.png') },
-        { id: 3, source: require('../assets/images/illustration_3.png') },
+        {id: 1, source: require('../assets/images/illustration_1.png')},
+        {id: 2, source: require('../assets/images/illustration_2.png')},
+        {id: 3, source: require('../assets/images/illustration_3.png')},
     ],
 };
 
 export default Tv;
 
 const styles = StyleSheet.create({
+    container: {
+        borderColor: theme.colors.gray2,
+        borderWidth: StyleSheet.hairlineWidth,
+    },
     header: {
-        paddingHorizontal: theme.sizes.base * 2
+        paddingBottom: theme.sizes.base * 1
     },
     tabs: {
         borderBottomColor: theme.colors.gray2,
@@ -177,18 +178,9 @@ const styles = StyleSheet.create({
         maxHeight: (width - (theme.sizes.padding * 2.4) - theme.sizes.base) / 2,
         marginHorizontal: theme.sizes.base * 1,
     },
-    searchIcon: {
-        position: 'absolute',
-        right: theme.sizes.base / 1.333,
-        top: theme.sizes.base / 1.4,
-    },
     channelImg: {
         height: theme.sizes.base * 3.2,
         width: theme.sizes.base * 3.2,
-    },
-    webView: {
-        height: theme.sizes.base * 13.2,
-        width: '100%',
     },
     flatItem: {
         marginTop: theme.sizes.base * 3.2,
