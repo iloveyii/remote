@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "remote",
-    "slug": "remote",
+    "slug": "remote-control",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "se.softhem.remote"
+    },
+    "android": {
+      "package": "se.softhem.remote"
     }
   }
 }
