@@ -1,4 +1,4 @@
-const channels = [
+const controls = [
     {
         id: 'backward',
         name: 'Backward',
@@ -53,7 +53,10 @@ const channels = [
         count: 133,
         image: require('../assets/icons/fertilizers.png'),
         cmd : 'VOL -1'
-    },
+    }
+];
+
+const channels = [
     {
         id: 'ch1',
         name: 'News 92',
@@ -85,7 +88,7 @@ const channels = [
         id: 'ch4',
         name: 'PTV News',
         icon: 'ios-volume-low',
-        tags: ['channels'],
+        tags: ['channels', 'favourite'],
         count: 133,
         image: require('../assets/icons/ptv-news.jpg'),
         cmd : 'PLAY http://67.231.248.131:1935/live/PTVnews/chunklist_w1281891626.m3u8 http://www.gharana.pk/wp-content/uploads/2017/10/PTV-News-Live-HD-Streaming-24x7-LIVE-HD-GharanaPK.jpg'
@@ -103,6 +106,9 @@ const channels = [
 
 ];
 
+const tabs = ['Remote', 'Channels', 'Favourite', 'TV'];
 export {
     channels,
+    controls,
+    tabs
 };

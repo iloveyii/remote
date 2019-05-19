@@ -3,10 +3,12 @@ import { createAppContainer, createStackNavigator} from 'react-navigation';
 import { Image } from 'react-native';
 
 import Welcome from '../screens/Welcome';
+import Tv from '../screens/Tv';
 import {theme } from '../constants';
 
 const screens = createStackNavigator({
-        Welcome
+        Welcome,
+        Tv
     }, {
     defaultNavigationOptions: {
         headerStyle: {
