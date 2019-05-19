@@ -3,6 +3,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 import {Video} from 'expo';
 import {MaterialIcons} from '@expo/vector-icons';
 import {Block} from '../components';
+import {theme} from "../constants";
 
 class Player extends React.Component {
     state = {
@@ -35,7 +36,7 @@ class Player extends React.Component {
                     style={{width, height: 300}}
                     isMuted={this.state.mute}
                 />
-                <Block flex={false} row center space="between" style={styles.controlBar}>
+                <Block gradient flex={false} row center space="between" style={styles.controlBar}>
                     <MaterialIcons
                         name={this.state.mute ? "volume-mute" : "volume-up"}
                         size={45}
@@ -77,6 +78,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        backgroundColor: theme.colors.secondary,
     }
 });
